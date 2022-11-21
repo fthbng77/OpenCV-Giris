@@ -3,7 +3,7 @@ import numpy as np
 """Gürültü bir sinyal bir kanal üzerinde aktarılırken,
 çevredeki etkenlerin altında oluşan istenmeyen değişimlerdir."""
 kamera = cv2.VideoCapture(0)
-
+"""Burada Filtrelemel uygulayarak gürültüleri engellemeye ve daha net görüntü almaya calısacagız."""
 
 sari_ton_alt= np.array([20,50,50])
 sari_ton_üst= np.array([37,255,255])
@@ -24,13 +24,11 @@ while True:
     bir piksel ve çevresindeki piksellerin uygun başka bir matris ile carpılmasına denir.
     Bu matrise karnel denir.
     """
-    
     kernel = np.ones((15,15),dtype=  np.float32) /225 #bu genelde ezbere kullanılan bir kalıp.
-    #
+    
     
     smoothed=cv2.filter2D(sari_algılama,-1,kernel)#bitwise ve -1 degerleri sabit.
 
-    #
     blur = cv2.GaussianBlur(sari_algılama,(15,15),0)
     #median filtre
     median_blur= cv2.medianBlur(sari_algılama,15)
