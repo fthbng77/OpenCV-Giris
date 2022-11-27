@@ -34,14 +34,25 @@ while(1):
     
     üst_sari = np.array([38, 255, 255])
 
+
+    lower_blue = np.array([75,100,100])
+    upper_blue = np.array([130,255,255])  
+
     #araligi söyleyelim.
     mask = cv.inRange(hsv, alt_sari, üst_sari)
-
-    res = cv.bitwise_and(frame,frame,mask=mask)
-
+    mask2=  cv.inRange(hsv,lower_blue, upper_blue
+    
+    sari = cv.bitwise_and(frame,frame,mask=mask)
+    mavi=cv.bitwise_and(frame,frame,mask=mask2)
+                       
+    #basit bir toplama islemi ile sari ve mavi filtreleri birlikte kullanabiliriz.                   
+    toplam = cv.bitwise_and(frame,frame,mask=toplammask)                     
     cv.imshow('frame',frame)
     cv.imshow('mask',mask)
-    cv.imshow('res',res)
+    cv.imshow('res',sari)
+    cv.imshow("mavi",mavi)
+    cv.imshow('toplam',toplam)                   
+                       
     k = cv.waitKey(5) & 0xFF
     if k == 27:
         break
